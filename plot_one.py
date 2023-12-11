@@ -2,7 +2,7 @@ import re
 import matplotlib.pyplot as plt
 
 # Read the content of the txt file
-with open('td.txt', 'r') as file:
+with open('runs/td_old.txt', 'r') as file:
     content = file.read()
 
 # Use regular expressions to find step numbers and average returns
