@@ -273,8 +273,9 @@ if __name__ == "__main__":
                 out += f"Average return: {sum / 10}\n"
                 sum = 0
 
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
-    with open('runs-txt/td-' + datetime.datetime.now() + ".txt", 'w') as file:
+    with open('runs-txt/td-' + current_time + ".txt", 'w') as file:
         # Write some content to the file
         file.write(out)
     if args.save_model:

@@ -21,7 +21,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--exp-name", type=str, default=os.path.basename(__file__).rstrip(".py"),
         help="the name of this experiment")
-    parser.add_argument("--seed", type=int, default=1,
+    parser.add_argument("--seed", type=int, default=4,
         help="seed of the experiment")
     parser.add_argument("--torch-deterministic", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="if toggled, `torch.backends.cudnn.deterministic=False`")
@@ -308,7 +308,9 @@ if __name__ == "__main__":
                 out += f"Average return: {sum / 10}\n"
                 sum = 0
 
-    with open('runs-txt/sac-' + datetime.datetime.now() + ".txt", 'w') as file:
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    with open('runs-txt/sac-' + current_time + ".txt", 'w') as file:
         # Write some content to the file
         file.write(out)
 

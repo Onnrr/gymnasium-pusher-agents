@@ -311,7 +311,9 @@ if __name__ == "__main__":
                 sum = 0
 
 
-    with open('runs-txt/td-her-' + datetime.datetime.now() + ".txt", 'w') as file:
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+    with open('runs-txt/td-her-' + current_time + ".txt", 'w') as file:
         # Write some content to the file
         file.write(out)
     if args.save_model:
