@@ -1,4 +1,5 @@
 # docs and experiment results can be found at https://docs.cleanrl.dev/rl-algorithms/sac/#sac_continuous_actionpy
+import datetime
 import argparse
 import os
 import random
@@ -342,7 +343,7 @@ if __name__ == "__main__":
                 out += f"Average return: {sum / 10}\n"
                 sum = 0
 
-    with open('sac.txt', 'w') as file:
+    with open('runs/sac-her-' + datetime.datetime.now() + ".txt", 'w') as file:
         # Write some content to the file
         file.write(out)
 
@@ -350,19 +351,6 @@ if __name__ == "__main__":
         model_path = f"runs/{run_name}/{args.exp_name}.cleanrl_model"
         torch.save((actor.state_dict(), qf1.state_dict(), qf2.state_dict()), model_path)
         print(f"model saved to {model_path}")
-        # from cleanrl_utils.evals.sac_eval import evaluate
-
-        # episodic_returns = evaluate(
-        #     model_path,
-        #     make_env,
-        #     args.env_id,
-        #     eval_episodes=10,
-        #     run_name=f"{run_name}-eval",
-        #     Model=(Actor, SoftQNetwork),
-        #     device=device,
-        # )
-        # for idx, episodic_return in enumerate(episodic_returns):
-        #     writer.add_scalar("eval/episodic_return", episodic_return, idx)
 
     envs.close()
     writer.close()

@@ -1,5 +1,6 @@
 # docs and experiment results can be found at https://docs.cleanrl.dev/rl-algorithms/td3/#td3_continuous_actionpy
 import argparse
+import datetime
 import os
 import random
 import time
@@ -310,7 +311,7 @@ if __name__ == "__main__":
                 sum = 0
 
 
-    with open('td.txt', 'w') as file:
+    with open('runs/td-her-' + datetime.datetime.now() + ".txt", 'w') as file:
         # Write some content to the file
         file.write(out)
     if args.save_model:
