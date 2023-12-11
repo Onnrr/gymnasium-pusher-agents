@@ -274,7 +274,7 @@ if __name__ == "__main__":
                 sum = 0
 
 
-    with open('runs/td-' + datetime.datetime.now() + ".txt", 'w') as file:
+    with open('runs-txt/td-' + datetime.datetime.now() + ".txt", 'w') as file:
         # Write some content to the file
         file.write(out)
     if args.save_model:

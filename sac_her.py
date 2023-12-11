@@ -343,7 +343,7 @@ if __name__ == "__main__":
                 out += f"Average return: {sum / 10}\n"
                 sum = 0
 
-    with open('runs/sac-her-' + datetime.datetime.now() + ".txt", 'w') as file:
+    with open('runs-txt/sac-her-' + datetime.datetime.now() + ".txt", 'w') as file:
         # Write some content to the file
         file.write(out)
 
