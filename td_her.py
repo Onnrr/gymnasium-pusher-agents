@@ -4,6 +4,7 @@ import os
 import random
 import time
 from distutils.util import strtobool
+import copy
 
 import gymnasium as gym
 import numpy as np
@@ -122,6 +123,19 @@ class Actor(nn.Module):
         x = F.relu(self.fc2(x))
         x = torch.tanh(self.fc_mu(x))
         return x * self.action_scale + self.action_bias
+    
+
+def compute_reward(infos, achieved_goal, desired_goal):
+    fingertip = [infos["final_observation"][0][14], infos["final_observation"][0][15], infos["final_observation"][0][16] ]
+    achieved_goal_np = np.array(achieved_goal)
+    fingertip_np = np.array(fingertip)
+    desired_goal_np = np.array(desired_goal)
+
+    reward_dist = 0 #-np.linalg.norm(fingertip_np - desired_goal_np)
+    reward_ctrl = infos["final_info"][0]["reward_ctrl"]
+    reward_near = -np.linalg.norm(achieved_goal_np - fingertip_np)
+    return [reward_dist + ( 0.1 * reward_ctrl ) + ( 0.5 *  reward_near )]
+
 
 
 if __name__ == "__main__":
@@ -189,7 +203,6 @@ if __name__ == "__main__":
     # TRY NOT TO MODIFY: start the game
     obs, _ = envs.reset(seed=args.seed)
     episode_infos = defaultdict(list)
-    print(args.total_timesteps)
     for global_step in range(args.total_timesteps):
         # ALGO LOGIC: put action logic here
         if global_step < args.learning_starts:
@@ -203,37 +216,46 @@ if __name__ == "__main__":
         # TRY NOT TO MODIFY: execute the game and log data.
         next_obs, rewards, terminations, truncations, infos = envs.step(actions)
 
+        
+        sampled_her = False
         # TRY NOT TO MODIFY: record rewards for plotting purposes
         if "final_info" in infos:
+            if random.uniform(0, 1) < HER_SAMPLE_PROB:
+                sampled_her = True
+                ############ HER ################
+                achieved_goal = [next_obs[0][17], next_obs[0][18], next_obs[0][19]]
+                desired_goal = [next_obs[0][20], next_obs[0][21], next_obs[0][22]]
+
+                achieved = next_obs[0].copy()
+                achieved[20] = next_obs[0][17]
+                achieved[21] = next_obs[0][18]
+                achieved[22] = next_obs[0][19]
+
+                computed_reward = compute_reward(infos, achieved_goal, desired_goal)
+                her_termination = [True]
+                new_infos = copy.deepcopy(infos)
+                new_infos["final_observation"] = achieved
+                new_infos["final_info"][0]["reward_dist"] = 0
+                new_infos["final_info"][0]["episode"]["r"] = computed_reward
+                
+                rb.add(obs, achieved, actions, computed_reward, her_termination, new_infos)
+
+                ################################
+
             for info in infos["final_info"]:
                 print(f"global_step={global_step}, episodic_return={info['episode']['r']}")
                 sum += info['episode']['r']
                 break
 
         # TRY NOT TO MODIFY: save data to reply buffer; handle `terminal_observation`
+        #if not sampled_her:
         real_next_obs = next_obs.copy()
         for idx, trunc in enumerate(truncations):
             if trunc:
                 real_next_obs[idx] = infos["final_observation"][idx]
         rb.add(obs, real_next_obs, actions, rewards, terminations, infos)
 
-        # HER
-        if random.uniform(0, 1) < HER_SAMPLE_PROB:
-            for idx, (obs_t, action_t, reward_t, next_obs_t, done_t) in enumerate(
-                zip(obs, actions, rewards, real_next_obs, terminations)
-            ):
-                if done_t:
-                    for future_idx in range(idx + 1, len(obs)):
-                        future_reward = sum(rewards[future_idx:])
-                        future_obs = real_next_obs[future_idx]
-                        future_done = sum(terminations[future_idx:])
-                        hindsight_reward = future_reward
-                        hindsight_next_obs = future_obs
-                        hindsight_done = future_done
-
-                        # Update the replay buffer with hindsight transition
-                        rb.add(obs_t, hindsight_next_obs, action_t, hindsight_reward, hindsight_done, infos)
-
+       
         # TRY NOT TO MODIFY: CRUCIAL step easy to overlook
         obs = next_obs
 
@@ -279,14 +301,7 @@ if __name__ == "__main__":
                     target_param.data.copy_(args.tau * param.data + (1 - args.tau) * target_param.data)
 
             if global_step % 100 == 0:
-                writer.add_scalar("losses/qf1_values", qf1_a_values.mean().item(), global_step)
-                writer.add_scalar("losses/qf2_values", qf2_a_values.mean().item(), global_step)
-                writer.add_scalar("losses/qf1_loss", qf1_loss.item(), global_step)
-                writer.add_scalar("losses/qf2_loss", qf2_loss.item(), global_step)
-                writer.add_scalar("losses/qf_loss", qf_loss.item() / 2.0, global_step)
-                writer.add_scalar("losses/actor_loss", actor_loss.item(), global_step)
                 print("SPS:", int(global_step / (time.time() - start_time)))
-                writer.add_scalar("charts/SPS", int(global_step / (time.time() - start_time)), global_step)
 
             if global_step % 1000 == 0:
                 out += f"\n-- At step {global_step}\n"

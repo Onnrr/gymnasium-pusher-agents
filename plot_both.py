@@ -11,15 +11,15 @@ def extract_data(file_path):
     return step_numbers, average_returns
 
 # File paths for SAC and TD3
-sac_file_path = 'sac.txt'
-td3_file_path = 'td.txt'
+sac_file_path = 'td.txt'
+td3_file_path = 'td_old.txt'
 
 # Extract data from files
 sac_steps, sac_returns = extract_data(sac_file_path)
 td3_steps, td3_returns = extract_data(td3_file_path)
 
 # Plotting
-plt.plot(sac_steps, sac_returns, label='SAC', marker='o')
+plt.plot(sac_steps, sac_returns, label='TD3 HER', marker='o')
 plt.plot(td3_steps, td3_returns, label='TD3', marker='o')
 
 plt.title('Average Return vs Number of Steps')

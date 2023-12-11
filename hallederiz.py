@@ -226,9 +226,26 @@ if __name__ == "__main__":
         # TRY NOT TO MODIFY: execute the game and log data.
         next_obs, rewards, terminations, truncations, infos = envs.step(actions)
 
+        # Inside your main loop after `envs.step(actions)` and before `rb.add(...)`
+
+        # HER transition relabeling and adding to the replay buffer
+        if "final_info" in infos:
+            for idx, info in enumerate(infos["final_info"]):
+                print(infos)
+                achieved_goal = info["episode"]["l"]
+                desired_goal = info["episode"]["l"]
+                # Create new transitions with hindsight goals and rewards
+                for t in range(len(obs)):
+                    # Create augmented transitions for HER using original observations (obs)
+                    achieved = obs[t].copy()
+                    achieved[:len(achieved_goal)] = achieved_goal  # Replace achieved goal
+                    reward = envs.compute_reward(achieved, desired_goal, info)
+                    # Add augmented transitions to the replay buffer
+                    rb.add(obs[t], achieved, actions[t], reward, dones[t], infos)
+
+
         # TRY NOT TO MODIFY: record rewards for plotting purposes
         if "final_info" in infos:
-            print(infos)
             for info in infos["final_info"]:
                 print(f"global_step={global_step}, episodic_return={info['episode']['r']}")
                 sum += info['episode']['r']

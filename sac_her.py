@@ -6,15 +6,17 @@ import time
 from distutils.util import strtobool
 
 import gymnasium as gym
+from gymnasium.wrappers import FlattenObservation
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 from stable_baselines3.common.buffers import ReplayBuffer
+from gymnasium import spaces
 from torch.utils.tensorboard import SummaryWriter
 
-
+HER_SAMPLE_PROB = 0.8
 def parse_args():
     # fmt: off
     parser = argparse.ArgumentParser()
@@ -82,6 +84,7 @@ def make_env(seed, idx, capture_video, run_name):
             env = gym.make("Pusher-v4", render_mode="human")
         env = gym.wrappers.RecordEpisodeStatistics(env)
         env.action_space.seed(seed)
+        # env = FlattenObservation(env)
         return env
 
     return thunk
@@ -147,6 +150,17 @@ class Actor(nn.Module):
         return action, log_prob, mean
 
 
+def compute_reward(infos, achieved_goal, desired_goal):
+    fingertip = [infos["final_observation"][0][14], infos["final_observation"][0][15], infos["final_observation"][0][16] ]
+    achieved_goal_np = np.array(achieved_goal)
+    fingertip_np = np.array(fingertip)
+    desired_goal_np = np.array(desired_goal)
+
+    reward_dist = 0 #-np.linalg.norm(fingertip_np - desired_goal_np)
+    reward_ctrl = infos["final_info"][0]["reward_ctrl"]
+    reward_near = -np.linalg.norm(achieved_goal_np - fingertip_np)
+    return [(reward_dist + ( 0.1 * reward_ctrl ) + ( 0.5 *  reward_near ))]
+
 if __name__ == "__main__":
     import stable_baselines3 as sb3
 
@@ -202,6 +216,8 @@ if __name__ == "__main__":
     else:
         alpha = args.alpha
 
+    envs.single_observation_space = spaces.Dict
+
     envs.single_observation_space.dtype = np.float32
     rb = ReplayBuffer(
         args.buffer_size,
@@ -228,7 +244,26 @@ if __name__ == "__main__":
 
         # TRY NOT TO MODIFY: record rewards for plotting purposes
         if "final_info" in infos:
-            print(infos)
+            if random.uniform(0, 1) < HER_SAMPLE_PROB:
+                sampled_her = True
+                ############ HER ################
+                achieved_goal = [next_obs[0][17], next_obs[0][18], next_obs[0][19]]
+                desired_goal = [next_obs[0][20], next_obs[0][21], next_obs[0][22]]
+
+                achieved = next_obs[0].copy()
+                achieved[20] = next_obs[0][17]
+                achieved[21] = next_obs[0][18]
+                achieved[22] = next_obs[0][19]
+
+                computed_reward = compute_reward(infos, achieved_goal, desired_goal)
+                her_termination = [True]
+                # new_infos = infos.copy()
+                # new_infos["final_observation"] = achieved
+                # new_infos["final_info"][0]["reward_dist"] = 0
+                # new_infos["final_info"][0]["episode"]["r"] = computed_reward
+                
+                rb.add(obs, achieved, actions, computed_reward, her_termination, infos)
+
             for info in infos["final_info"]:
                 print(f"global_step={global_step}, episodic_return={info['episode']['r']}")
                 sum += info['episode']['r']
