@@ -1,4 +1,5 @@
 # docs and experiment results can be found at https://docs.cleanrl.dev/rl-algorithms/sac/#sac_continuous_actionpy
+import copy
 import datetime
 import argparse
 import os
@@ -258,10 +259,10 @@ if __name__ == "__main__":
 
                 computed_reward = compute_reward(infos, achieved_goal, desired_goal)
                 her_termination = [True]
-                # new_infos = infos.copy()
-                # new_infos["final_observation"] = achieved
-                # new_infos["final_info"][0]["reward_dist"] = 0
-                # new_infos["final_info"][0]["episode"]["r"] = computed_reward
+                new_infos = copy.deepcopy(infos)
+                new_infos["final_observation"] = achieved
+                new_infos["final_info"][0]["reward_dist"] = 0
+                new_infos["final_info"][0]["episode"]["r"] = computed_reward
                 
                 rb.add(obs, achieved, actions, computed_reward, her_termination, infos)
 
