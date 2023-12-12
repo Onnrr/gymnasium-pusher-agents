@@ -1,7 +1,7 @@
 
 -- At step 6000
 SPS: 47
-Average return: [-807.96014]
+Average return: [-207.96014]
 
 -- At step 7000
 SPS: 41
