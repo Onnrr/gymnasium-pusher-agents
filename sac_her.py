@@ -24,7 +24,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--exp-name", type=str, default=os.path.basename(__file__).rstrip(".py"),
         help="the name of this experiment")
-    parser.add_argument("--seed", type=int, default=1,
+    parser.add_argument("--seed", type=int, default=6,
         help="seed of the experiment")
     parser.add_argument("--torch-deterministic", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="if toggled, `torch.backends.cudnn.deterministic=False`")
@@ -218,7 +218,7 @@ if __name__ == "__main__":
     else:
         alpha = args.alpha
 
-    envs.single_observation_space = spaces.Dict
+    #envs.single_observation_space = spaces.Dict
 
     envs.single_observation_space.dtype = np.float32
     rb = ReplayBuffer(
