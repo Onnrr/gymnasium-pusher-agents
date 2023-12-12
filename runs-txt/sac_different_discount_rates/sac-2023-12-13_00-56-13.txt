@@ -2,7 +2,7 @@ Discount Rate: 0.90
 
 -- At step 6000
 SPS: 56
-Average return: [-893.50653]
+Average return: [-193.50653]
 
 -- At step 7000
 SPS: 48
