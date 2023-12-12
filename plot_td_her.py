@@ -35,7 +35,7 @@ plt.plot(steps4, returns4, marker='o')
 plt.plot(steps5, returns5, marker='o')
 plt.plot(steps6, returns6, marker='o')
 
-plt.title('TD3 HER - Average Return vs Number of Steps')
+plt.title('TD3-HER - Average Return vs Number of Steps')
 plt.xlabel('Number of Steps')
 plt.ylabel('Average Return')
 plt.legend()
