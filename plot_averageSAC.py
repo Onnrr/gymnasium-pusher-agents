@@ -39,7 +39,7 @@ average_returns = [value / num_returns for value in sum_returns]
 # Plotting
 plt.plot(steps1, average_returns, marker='o')
 
-plt.title('Average Return vs Number of Steps')
+plt.title('SAC Average Over 6 Runs - Average Return vs Number of Steps')
 plt.xlabel('Number of Steps')
 plt.ylabel('Average Return')
 plt.legend()
