@@ -45,7 +45,7 @@ def parse_args():
     # Algorithm specific arguments
     parser.add_argument("--total-timesteps", type=int, default=100000,
         help="total timesteps of the experiments")
-    parser.add_argument("--buffer-size", type=int, default=int(1e6),
+    parser.add_argument("--buffer-size", type=int, default=int(1e4),
         help="the replay memory buffer size")
     parser.add_argument("--gamma", type=float, default=0.99,
         help="the discount factor gamma")
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     )
     start_time = time.time()
     sum = 0
-    out = ""
+    out = "Buffer Size: 10^4"
     # TRY NOT TO MODIFY: start the game
     obs, _ = envs.reset(seed=args.seed)
     for global_step in range(args.total_timesteps):
