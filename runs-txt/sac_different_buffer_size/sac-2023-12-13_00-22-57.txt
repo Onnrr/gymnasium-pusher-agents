@@ -1,0 +1,376 @@
+Buffer Size: 10^2
+-- At step 6000
+SPS: 95
+Average return: [-896.5731]
+
+-- At step 7000
+SPS: 78
+Average return: [-129.88608]
+
+-- At step 8000
+SPS: 66
+Average return: [-104.60923]
+
+-- At step 9000
+SPS: 59
+Average return: [-86.21538]
+
+-- At step 10000
+SPS: 54
+Average return: [-75.843796]
+
+-- At step 11000
+SPS: 50
+Average return: [-68.696884]
+
+-- At step 12000
+SPS: 48
+Average return: [-67.11299]
+
+-- At step 13000
+SPS: 46
+Average return: [-58.238434]
+
+-- At step 14000
+SPS: 44
+Average return: [-55.878075]
+
+-- At step 15000
+SPS: 43
+Average return: [-54.05238]
+
+-- At step 16000
+SPS: 42
+Average return: [-53.128998]
+
+-- At step 17000
+SPS: 41
+Average return: [-51.73467]
+
+-- At step 18000
+SPS: 40
+Average return: [-53.83592]
+
+-- At step 19000
+SPS: 40
+Average return: [-51.880512]
+
+-- At step 20000
+SPS: 39
+Average return: [-46.972652]
+
+-- At step 21000
+SPS: 39
+Average return: [-43.135174]
+
+-- At step 22000
+SPS: 38
+Average return: [-50.887245]
+
+-- At step 23000
+SPS: 38
+Average return: [-48.85489]
+
+-- At step 24000
+SPS: 37
+Average return: [-50.94868]
+
+-- At step 25000
+SPS: 36
+Average return: [-45.622425]
+
+-- At step 26000
+SPS: 36
+Average return: [-45.22301]
+
+-- At step 27000
+SPS: 36
+Average return: [-48.61135]
+
+-- At step 28000
+SPS: 35
+Average return: [-46.13043]
+
+-- At step 29000
+SPS: 35
+Average return: [-47.91569]
+
+-- At step 30000
+SPS: 34
+Average return: [-48.492195]
+
+-- At step 31000
+SPS: 34
+Average return: [-48.31389]
+
+-- At step 32000
+SPS: 34
+Average return: [-44.15591]
+
+-- At step 33000
+SPS: 34
+Average return: [-47.061928]
+
+-- At step 34000
+SPS: 34
+Average return: [-46.1714]
+
+-- At step 35000
+SPS: 34
+Average return: [-43.34856]
+
+-- At step 36000
+SPS: 34
+Average return: [-46.508385]
+
+-- At step 37000
+SPS: 34
+Average return: [-46.49012]
+
+-- At step 38000
+SPS: 34
+Average return: [-45.486423]
+
+-- At step 39000
+SPS: 33
+Average return: [-46.49101]
+
+-- At step 40000
+SPS: 33
+Average return: [-48.68295]
+
+-- At step 41000
+SPS: 33
+Average return: [-43.966515]
+
+-- At step 42000
+SPS: 33
+Average return: [-48.51631]
+
+-- At step 43000
+SPS: 33
+Average return: [-40.56898]
+
+-- At step 44000
+SPS: 33
+Average return: [-44.77524]
+
+-- At step 45000
+SPS: 33
+Average return: [-43.84618]
+
+-- At step 46000
+SPS: 33
+Average return: [-45.931717]
+
+-- At step 47000
+SPS: 33
+Average return: [-42.597145]
+
+-- At step 48000
+SPS: 33
+Average return: [-49.008087]
+
+-- At step 49000
+SPS: 33
+Average return: [-44.5873]
+
+-- At step 50000
+SPS: 33
+Average return: [-45.02903]
+
+-- At step 51000
+SPS: 33
+Average return: [-44.81076]
+
+-- At step 52000
+SPS: 33
+Average return: [-48.256386]
+
+-- At step 53000
+SPS: 33
+Average return: [-49.251472]
+
+-- At step 54000
+SPS: 33
+Average return: [-47.84458]
+
+-- At step 55000
+SPS: 33
+Average return: [-48.244366]
+
+-- At step 56000
+SPS: 33
+Average return: [-49.239174]
+
+-- At step 57000
+SPS: 33
+Average return: [-45.45321]
+
+-- At step 58000
+SPS: 33
+Average return: [-52.176674]
+
+-- At step 59000
+SPS: 33
+Average return: [-47.939583]
+
+-- At step 60000
+SPS: 32
+Average return: [-50.114433]
+
+-- At step 61000
+SPS: 32
+Average return: [-48.42637]
+
+-- At step 62000
+SPS: 32
+Average return: [-49.053192]
+
+-- At step 63000
+SPS: 32
+Average return: [-45.922455]
+
+-- At step 64000
+SPS: 32
+Average return: [-50.076077]
+
+-- At step 65000
+SPS: 32
+Average return: [-49.61961]
+
+-- At step 66000
+SPS: 32
+Average return: [-48.415916]
+
+-- At step 67000
+SPS: 32
+Average return: [-46.255074]
+
+-- At step 68000
+SPS: 32
+Average return: [-44.614132]
+
+-- At step 69000
+SPS: 32
+Average return: [-46.546967]
+
+-- At step 70000
+SPS: 32
+Average return: [-44.566837]
+
+-- At step 71000
+SPS: 32
+Average return: [-46.541172]
+
+-- At step 72000
+SPS: 32
+Average return: [-45.789497]
+
+-- At step 73000
+SPS: 31
+Average return: [-41.012375]
+
+-- At step 74000
+SPS: 31
+Average return: [-45.50955]
+
+-- At step 75000
+SPS: 31
+Average return: [-42.92285]
+
+-- At step 76000
+SPS: 31
+Average return: [-48.103905]
+
+-- At step 77000
+SPS: 31
+Average return: [-41.65722]
+
+-- At step 78000
+SPS: 31
+Average return: [-43.17866]
+
+-- At step 79000
+SPS: 31
+Average return: [-44.20437]
+
+-- At step 80000
+SPS: 31
+Average return: [-47.259773]
+
+-- At step 81000
+SPS: 31
+Average return: [-46.43939]
+
+-- At step 82000
+SPS: 30
+Average return: [-43.402977]
+
+-- At step 83000
+SPS: 30
+Average return: [-41.38282]
+
+-- At step 84000
+SPS: 30
+Average return: [-43.0278]
+
+-- At step 85000
+SPS: 30
+Average return: [-41.826244]
+
+-- At step 86000
+SPS: 30
+Average return: [-40.845665]
+
+-- At step 87000
+SPS: 30
+Average return: [-46.163353]
+
+-- At step 88000
+SPS: 30
+Average return: [-41.718353]
+
+-- At step 89000
+SPS: 30
+Average return: [-40.432808]
+
+-- At step 90000
+SPS: 30
+Average return: [-43.012222]
+
+-- At step 91000
+SPS: 30
+Average return: [-44.622322]
+
+-- At step 92000
+SPS: 30
+Average return: [-43.339397]
+
+-- At step 93000
+SPS: 29
+Average return: [-42.57982]
+
+-- At step 94000
+SPS: 29
+Average return: [-39.796066]
+
+-- At step 95000
+SPS: 29
+Average return: [-39.72338]
+
+-- At step 96000
+SPS: 29
+Average return: [-42.215843]
+
+-- At step 97000
+SPS: 29
+Average return: [-42.167988]
+
+-- At step 98000
+SPS: 29
+Average return: [-41.7463]
+
+-- At step 99000
+SPS: 29
+Average return: [-39.929295]
