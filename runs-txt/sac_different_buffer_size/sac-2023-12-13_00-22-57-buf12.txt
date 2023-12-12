@@ -1,7 +1,7 @@
 Buffer Size: 10^2
 -- At step 6000
 SPS: 95
-Average return: [-896.5731]
+Average return: [-296.5731]
 
 -- At step 7000
 SPS: 78
