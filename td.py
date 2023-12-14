@@ -33,7 +33,7 @@ def parse_args():
         help="the wandb's project name")
     parser.add_argument("--wandb-entity", type=str, default=None,
         help="the entity (team) of wandb's project")
-    parser.add_argument("--capture-video", type=lambda x: bool(strtobool(x)), default=False, nargs="?", const=True,
+    parser.add_argument("--capture-video", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="whether to capture videos of the agent performances (check out `videos` folder)")
     parser.add_argument("--save-model", type=lambda x: bool(strtobool(x)), default=True, nargs="?", const=True,
         help="whether to save model into the `runs/{run_name}` folder")
@@ -73,8 +73,8 @@ def parse_args():
 def make_env(seed, idx, capture_video, run_name):
     def thunk():
         if capture_video and idx == 0:
-            env = gym.make("Pusher-v4", render_mode="human")
-            env = gym.wrappers.RecordVideo(env, f"videos/{run_name}")
+            env = gym.make("Pusher-v4", render_mode="rgb_array")
+            env = gym.wrappers.RecordVideo(env, f"videos/td")
         else:
             env = gym.make("Pusher-v4", render_mode="human")
         env = gym.wrappers.RecordEpisodeStatistics(env)

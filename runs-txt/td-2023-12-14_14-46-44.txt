@@ -1,0 +1,16 @@
+
+-- At step 6000
+SPS: 396
+Average return: [-797.88336]
+
+-- At step 7000
+SPS: 273
+Average return: [-56.827953]
+
+-- At step 8000
+SPS: 231
+Average return: [-59.56248]
+
+-- At step 9000
+SPS: 207
+Average return: [-61.58319]
